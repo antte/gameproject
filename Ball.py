@@ -30,3 +30,8 @@ class Ball:
 
     def explode(self):
         self.surface = pygame.image.load(IMAGES_PATH + "explosion.png")
+        Timer(2.0, destroy)
+
+    def destroy(self):
+        self.surface.fill
+        self.surface.set_alpha(255)
