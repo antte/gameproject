@@ -1,7 +1,8 @@
 import ConfigParser
-import os
 import pygame
 import sys
+
+from Ball import Ball
 
 config = ConfigParser.ConfigParser()
 config.readfp(open('config.cfg'))
@@ -18,25 +19,18 @@ display = pygame.display.set_mode((display_config['width'],
                                   display_config['height']))
 pygame.display.set_caption(display_config['caption'])
 pygame.mouse.set_visible(0)
-
-speed = [2, 2]
 black = 0, 0, 0
-
-images_path = config.get('Assets', 'image_path')
-ball = pygame.image.load(images_path + "ball.gif")
-ballrect = ball.get_rect()
+ball = Ball(config)
 
 while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             sys.exit()
+        if event.type == pygame.KEYDOWN or event.type == pygame.KEYUP:
+            print event
 
-    ballrect = ballrect.move(speed)
-    if ballrect.left < 0 or ballrect.right > display_config['width']:
-        speed[0] = -speed[0]
-    if ballrect.top < 0 or ballrect.bottom > display_config['height']:
-        speed[1] = -speed[1]
+    ball.tick()
 
     display.fill(black)
-    display.blit(ball, ballrect)
+    display.blit(ball.getSurface(), ball.getRect())
     pygame.display.flip()
