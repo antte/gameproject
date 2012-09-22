@@ -1,22 +1,27 @@
 import pygame
 from pygame.locals import *
+from threading import Timer
 
 class Ball:
-    IMAGES_PATH = config.get('Assets', 'image_path')
+
+    isExploding = False
 
     def __init__(self, config):
-        self.speed = [2, 2]
+        self.speed = [1, 1]
         self.config = config
-        self.surface = pygame.image.load(IMAGES_PATH + "ball.gif")
+        image_path = self.config.get('Assets', 'image_path')
+        self.surface = pygame.image.load(image_path + "ball.gif")
         self.rect = self.surface.get_rect()
 
-        Timer(30.0, explode)
+        Timer(5, self.explode).start()
 
     def tick(self):
         display_width = self.config.getint('Display', 'width')
         display_height = self.config.getint('Display', 'height')
 
-        self.rect = self.rect.move(self.speed)
+        if not self.isExploding:
+            self.rect = self.rect.move(self.speed)
+
         if self.rect.left < 0 or self.rect.right > display_width:
             self.speed[0] = -self.speed[0]
         if self.rect.top < 0 or self.rect.bottom > display_height:
@@ -29,9 +34,11 @@ class Ball:
         return self.rect
 
     def explode(self):
-        self.surface = pygame.image.load(IMAGES_PATH + "explosion.png")
-        Timer(2.0, destroy)
+        self.isExploding = True
+        image_path = self.config.get('Assets', 'image_path')
+        self.surface = pygame.image.load(image_path + "explosion.png")
+        Timer( 1, self.destroy).start()
 
     def destroy(self):
-        self.surface.fill
-        self.surface.set_alpha(255)
+        self.surface.fill((0,0,0))
+        self.isExploding = False
