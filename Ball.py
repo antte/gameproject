@@ -1,8 +1,8 @@
 import pygame
 from pygame.locals import *
 
-class Ball:
 
+class Ball:
     def __init__(self, config):
         self.speed = [2, 2]
         self.config = config
@@ -11,7 +11,6 @@ class Ball:
         self.rect = self.surface.get_rect()
 
     def tick(self):
-
         display_width = self.config.getint('Display', 'width')
         display_height = self.config.getint('Display', 'height')
 
@@ -20,9 +19,3 @@ class Ball:
             self.speed[0] = -self.speed[0]
         if self.rect.top < 0 or self.rect.bottom > display_height:
             self.speed[1] = -self.speed[1]
-
-    def getSurface(self):
-        return self.surface
-
-    def getRect(self):
-        return self.rect
