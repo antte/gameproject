@@ -7,7 +7,7 @@ class Ball:
     isExploding = False
 
     def __init__(self, config):
-        self.speed = [1, 1]
+        self.speed = [3, 3]
         self.config = config
         image_path = self.config.get('Assets', 'image_path')
         self.surface = pygame.image.load(image_path + "ball.gif")
