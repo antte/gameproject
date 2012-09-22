@@ -13,11 +13,12 @@ class Ball:
         self.surface = pygame.image.load(image_path + "ball.gif")
         self.rect = self.surface.get_rect()
 
-        Timer(5, self.explode).start()
-
     def tick(self):
         display_width = self.config.getint('Display', 'width')
         display_height = self.config.getint('Display', 'height')
+
+        if pygame.key.get_pressed()[K_SPACE]:
+            self.explode()
 
         if not self.isExploding:
             self.rect = self.rect.move(self.speed)
@@ -41,7 +42,7 @@ class Ball:
         self.surface = pygame.Surface((280, 238))
         pygame.transform.scale2x(old, self.surface)
 
-        Timer( 1, self.destroy).start()
+        Timer(1, self.destroy).start()
 
     def destroy(self):
         self.surface.fill((0,0,0))
