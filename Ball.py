@@ -37,6 +37,10 @@ class Ball:
         self.isExploding = True
         image_path = self.config.get('Assets', 'image_path')
         self.surface = pygame.image.load(image_path + "explosion.png")
+        old = self.surface
+        self.surface = pygame.Surface((280, 238))
+        pygame.transform.scale2x(old, self.surface)
+
         Timer( 1, self.destroy).start()
 
     def destroy(self):
