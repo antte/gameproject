@@ -1,9 +1,33 @@
-import pygame
+import pygame, sys
 
 pygame.init()
-screen = pygame.display.set_mode((640, 480))
+
+screen = {
+    'width': 640,
+    'height': 480,
+}
+
+screen = pygame.display.set_mode((screen.width , screen.height))
 pygame.display.set_caption('glogghack #2')
 pygame.mouse.set_visible(0)
+images_path = 'images/'
+
+speed = [2, 2]
+black = 0, 0, 0
+
+ball = pygame.image.load(images_path + "ball.gif")
+ballrect = ball.get_rect()
 
 while True:
-    pass
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT: sys.exit()
+
+    ballrect = ballrect.move(speed)
+    if ballrect.left < 0 or ballrect.right > screen.width:
+        speed[0] = -speed[0]
+    if ballrect.top < 0 or ballrect.bottom > screen.height:
+        speed[1] = -speed[1]
+
+    screen.fill(black)
+    screen.blit(ball, ballrect)
+    pygame.display.flip()
