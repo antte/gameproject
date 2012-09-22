@@ -9,15 +9,7 @@ from Ball import Ball
 config = ConfigParser.ConfigParser()
 config.readfp(open('config.cfg'))
 
-display_config = {
-    'caption': config.get('Display', 'caption'),
-    'width': config.getint('Display', 'width'),
-    'height': config.getint('Display', 'height'),
-    'framerate': config.getint('Display', 'framerate')
-}
-
-
-engine = Engine(display_config)
+engine = Engine(config)
 ball = Ball(config)
 engine.entities.append(ball)
 
