@@ -40,9 +40,15 @@ class Ball:
         old = self.surface
         self.surface = pygame.Surface((280, 238))
         pygame.transform.scale2x(old, self.surface)
+        self.__explode_sound()
 
         Timer( 1, self.destroy).start()
 
     def destroy(self):
         self.surface.fill((0,0,0))
         self.isExploding = False
+
+    def __explode_sound(self):
+        pygame.mixer.init()
+        sound_path = self.config.get('Assets', 'sound_path')
+        pygame.mixer.Sound(sound_path + 'explosion.wav').play()
