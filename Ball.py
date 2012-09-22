@@ -1,13 +1,13 @@
 import pygame
 from pygame.locals import *
 
-
 class Ball:
+    IMAGES_PATH = config.get('Assets', 'image_path')
+
     def __init__(self, config):
         self.speed = [2, 2]
         self.config = config
-        images_path = config.get('Assets', 'image_path')
-        self.surface = pygame.image.load(images_path + "ball.gif")
+        self.surface = pygame.image.load(IMAGES_PATH + "ball.gif")
         self.rect = self.surface.get_rect()
 
         Timer(30.0, explode)
