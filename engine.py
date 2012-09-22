@@ -9,6 +9,8 @@ class Engine:
         pygame.display.set_caption(display_config['caption'])
         pygame.mouse.set_visible(0)
 
+        self.entities = []
+
     def update(self):
         black = 0, 0, 0
         self.display.fill(black)
