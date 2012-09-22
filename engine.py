@@ -10,8 +10,12 @@ class Engine:
         pygame.mouse.set_visible(0)
 
         self.entities = []
+        self.framerate = display_config['framerate']
+        self.clock = pygame.time.Clock()
 
     def update(self):
+        self.clock.tick(self.framerate)
+
         black = 0, 0, 0
         self.display.fill(black)
 

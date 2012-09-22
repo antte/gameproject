@@ -12,7 +12,8 @@ config.readfp(open('config.cfg'))
 display_config = {
     'caption': config.get('Display', 'caption'),
     'width': config.getint('Display', 'width'),
-    'height': config.getint('Display', 'height')
+    'height': config.getint('Display', 'height'),
+    'framerate': config.getint('Display', 'framerate')
 }
 
 
