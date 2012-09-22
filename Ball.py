@@ -10,6 +10,8 @@ class Ball:
         self.surface = pygame.image.load(images_path + "ball.gif")
         self.rect = self.surface.get_rect()
 
+        Timer(30.0, explode)
+
     def tick(self):
         display_width = self.config.getint('Display', 'width')
         display_height = self.config.getint('Display', 'height')
@@ -19,3 +21,12 @@ class Ball:
             self.speed[0] = -self.speed[0]
         if self.rect.top < 0 or self.rect.bottom > display_height:
             self.speed[1] = -self.speed[1]
+
+    def getSurface(self):
+        return self.surface
+
+    def getRect(self):
+        return self.rect
+
+    def explode(self):
+        self.surface = pygame.image.load(IMAGES_PATH + "explosion.png")
