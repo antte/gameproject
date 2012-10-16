@@ -4,7 +4,7 @@ from threading import Timer
 
 class Ball:
 
-    isExploding = False
+    is_exploding = False
 
     def __init__(self, config):
         self.speed = [3, 3]
@@ -20,7 +20,7 @@ class Ball:
         if pygame.key.get_pressed()[K_SPACE]:
             self.explode()
 
-        if not self.isExploding:
+        if not self.is_exploding:
             self.rect = self.rect.move(self.speed)
 
         if self.rect.left < 0 or self.rect.right > display_width:
@@ -35,7 +35,7 @@ class Ball:
         return self.rect
 
     def explode(self):
-        self.isExploding = True
+        self.is_exploding = True
         image_path = self.config.get('Assets', 'image_path')
         self.surface = pygame.image.load(image_path + "explosion.png")
         old = self.surface
@@ -47,7 +47,7 @@ class Ball:
 
     def destroy(self):
         self.surface.fill((0,0,0))
-        self.isExploding = False
+        self.is_exploding = False
 
     def __explode_sound(self):
         pygame.mixer.init()
