@@ -13,7 +13,7 @@ class Ball:
         self.surface = pygame.image.load(image_path + "ball.gif")
         self.rect = self.surface.get_rect()
 
-    def tick(self):
+    def tick(self, display):
         display_width = self.config.getint('Display', 'width')
         display_height = self.config.getint('Display', 'height')
 
@@ -27,6 +27,8 @@ class Ball:
             self.speed[0] = -self.speed[0]
         if self.rect.top < 0 or self.rect.bottom > display_height:
             self.speed[1] = -self.speed[1]
+
+        display.blit(self.surface, self.rect)
 
     def getSurface(self):
         return self.surface

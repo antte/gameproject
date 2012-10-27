@@ -43,7 +43,6 @@ class Engine:
             self.display.blit(text, textpos)
 
         for entity in self.entities:
-            entity.tick()
-            self.display.blit(entity.surface, entity.rect)
+            entity.tick(self.display)
 
         pygame.display.flip()
